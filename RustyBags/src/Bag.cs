@@ -26,6 +26,11 @@ public static class BagExtensions
             : component.GetBag() ?? component.GetQuiver();
     }
 
+    public static Bag? GetBag(this Humanoid humanoid)
+    {
+        return !humanoid.TryGetComponent(out BagEquipment component) ? null : component.GetBag();
+    }
+
     public static Quiver? GetEquippedQuiver(this Humanoid humanoid)
     {
         return !humanoid.TryGetComponent(out BagEquipment component) ? null : component.GetQuiver();
@@ -87,6 +92,26 @@ public class BagSetup
         drop.m_itemData.m_shared.m_equipStatusEffect = statusEffect;
         if (!isQuiver) restrictConfig = Configs.config(englishName, "Restrictions", Restriction.None, "Set restrictions");
         if(replaceShader) MaterialReplacer.RegisterGameObjectForShaderSwap(item.Prefab, MaterialReplacer.ShaderType.CustomCreature);
+        bags[sharedName] = this;
+    }
+
+    public BagSetup(ItemDrop item, bool isQuiver = false, bool isOreBag = false)
+    {
+        string sharedName = item.m_itemData.m_shared.m_name;
+        englishName = new Regex(@"[=\n\t\\""\'\[\]]*").Replace(Item.english.Localize(sharedName), "").Trim();
+        this.isQuiver = isQuiver;
+        this.isOreBag = isOreBag;
+        statusEffect = isOreBag ? ScriptableObject.CreateInstance<SE_OreBag>() : ScriptableObject.CreateInstance<SE_Bag>();
+        statusEffect.name = $"SE_Bag_{item.name}";
+        statusEffect.m_name = sharedName;
+        ItemDrop.ItemData data = item.m_itemData;
+        statusEffect.m_icon = data.GetIcon();
+        statusEffect.data = this;
+        statusEffect.m_speedModifier = -0.05f;
+        item.m_itemData = new Bag(data);
+        item.m_itemData.m_dropPrefab = item.gameObject;
+        item.m_itemData.m_shared.m_equipStatusEffect = statusEffect;
+        if (!isQuiver) restrictConfig = Configs.config(englishName, "Restrictions", Restriction.None, "Set restrictions");
         bags[sharedName] = this;
     }
 

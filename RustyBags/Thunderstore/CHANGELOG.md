@@ -1,3 +1,6 @@
+# 1.3.4
+- AzuEPI fix
+
 # 1.3.3
 - positioning buttons programmatically
 

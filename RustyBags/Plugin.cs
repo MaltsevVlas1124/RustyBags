@@ -23,7 +23,7 @@ namespace RustyBags
     public class RustyBagsPlugin : BaseUnityPlugin
     {
         internal const string ModName = "RustyBags";
-        internal const string ModVersion = "1.3.3";
+        internal const string ModVersion = "1.3.4";
         internal const string Author = "RustyMods";
         private const string ModGUID = Author + "." + ModName;
         public const string ConfigFileName = ModGUID + ".cfg";
@@ -266,8 +266,7 @@ namespace RustyBags
         {
             if (!AzuExtendedPlayerInventory.API.IsLoaded()) return;
             ConfigEntry<Toggle> addBagSlotConfig = Configs.config("2 - Extended Player Inventory", "Add Bag Slot", Toggle.On, "If on, will add bag slot to EPI");
-            string? bagLabel = Localization.instance.Localize(Keys.Bag);
-
+            
             OnBagSlotConfigChange();
             addBagSlotConfig.SettingChanged += (_, _) =>
             {
@@ -275,9 +274,7 @@ namespace RustyBags
             };
             ConfigEntry<Toggle> addQuiverSlotConfig = Configs.config("2 - Extended Player Inventory", "Add Quiver Slot", Toggle.On,
                 "If on, will add quiver slot to EPI");
-                
-            string? quiverLabel = Localization.instance.Localize(Keys.Quiver);
-
+            
             OnQuiverSlotConfigChange();
             addQuiverSlotConfig.SettingChanged += (_, _) =>
             {
@@ -287,10 +284,10 @@ namespace RustyBags
 
             void OnQuiverSlotConfigChange()
             {
-                AzuExtendedPlayerInventory.API.RemoveSlot(quiverLabel);
+                AzuExtendedPlayerInventory.API.RemoveSlot(Keys.Quiver);
                 if (addQuiverSlotConfig.Value is Toggle.On)
                 {
-                    AzuExtendedPlayerInventory.API.AddSlot(quiverLabel, player => player.GetEquippedQuiver(),
+                    AzuExtendedPlayerInventory.API.AddSlot(Keys.Quiver, player => player.GetEquippedQuiver(),
                         item =>
                         {
                             if (item is not Quiver) return false;
@@ -302,10 +299,10 @@ namespace RustyBags
 
             void OnBagSlotConfigChange()
             {
-                AzuExtendedPlayerInventory.API.RemoveSlot(bagLabel);
+                AzuExtendedPlayerInventory.API.RemoveSlot(Keys.Bag);
                 if (addBagSlotConfig.Value is Toggle.On)
                 {
-                    AzuExtendedPlayerInventory.API.AddSlot(bagLabel, player => player.GetEquippedBag(),
+                    AzuExtendedPlayerInventory.API.AddSlot(Keys.Bag, player => player.GetBag(),
                         item =>
                         {
                             if (item is not Bag) return false;
