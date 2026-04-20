@@ -3,6 +3,7 @@ using System.Text;
 using HarmonyLib;
 using ItemManager;
 using JetBrains.Annotations;
+using RustyBags.Managers;
 using RustyBags.Utilities;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -23,6 +24,7 @@ public static class Charms
     private static void Setup(FejdStartup __instance)
     {
         if (loaded) return;
+        if (Configs.EnableCharmsConfig.Value == Toggle.Off) return;
         AssetBundle bundle = PrefabManager.RegisterAssetBundle("bags_bundle");
         GameObject? source = bundle.LoadAsset<GameObject>("SkullLantern_RS");
         ZNetScene? scene = __instance.m_objectDBPrefab.GetComponent<ZNetScene>();
@@ -31,7 +33,9 @@ public static class Charms
         if (BrennaLantern != null)
         {
             BrennaLantern.Name.English("Brenna Charm");
+            BrennaLantern.Name.Ukrainian("Оберіг Бренни");
             BrennaLantern.Description.English("Crafted from the remains of Brenna");
+            BrennaLantern.Description.Ukrainian("Створено з останків Бренни");
             BrennaLantern.Crafting.Add(CraftingTable.Forge, 1);
             BrennaLantern.RequiredItems.Add("TrophySkeletonHildir", 1);
             BrennaLantern.RequiredItems.Add("Bronze", 3);
@@ -45,7 +49,9 @@ public static class Charms
         if (PoisonLantern != null)
         {
             PoisonLantern.Name.English("Poison Skelett Charm");
+            PoisonLantern.Name.Ukrainian("Оберіг отруйного кістяка");
             PoisonLantern.Description.English("Crafted from the remains of a poisoned skeleton");
+            PoisonLantern.Description.Ukrainian("Створено з останків отруйного кістяка");
             PoisonLantern.Crafting.Add(CraftingTable.Forge, 1);
             PoisonLantern.RequiredItems.Add("TrophySkeletonPoison", 1);
             PoisonLantern.RequiredItems.Add("Bronze", 3);
@@ -59,7 +65,9 @@ public static class Charms
         if (SkullLantern != null)
         {
             SkullLantern.Name.English("Skelett Charm");
+            SkullLantern.Name.Ukrainian("Оберіг кістяка");
             SkullLantern.Description.English("Crafted from the remains of a skeleton");
+            SkullLantern.Description.Ukrainian("Створено з останків кістяка");
             SkullLantern.Crafting.Add(CraftingTable.Forge, 1);
             SkullLantern.RequiredItems.Add("TrophySkeleton", 1);
             SkullLantern.RequiredItems.Add("Bronze", 3);
@@ -73,7 +81,9 @@ public static class Charms
         if (CharredLantern != null)
         {
             CharredLantern.Name.English("Charred Charm");
+            CharredLantern.Name.Ukrainian("Обвуглений оберіг");
             CharredLantern.Description.English("Crafted from the remains of a charred warrior");
+            CharredLantern.Description.Ukrainian("Створено з останків обвугленого воїна");
             CharredLantern.Crafting.Add(CraftingTable.Forge, 1);
             CharredLantern.RequiredItems.Add("TrophyCharredMelee", 1);
             CharredLantern.RequiredItems.Add("Bronze", 3);
@@ -87,7 +97,9 @@ public static class Charms
         if (GhostLantern != null)
         {
             GhostLantern.Name.English("Ghastly Charm");
+            GhostLantern.Name.Ukrainian("Примарний оберіг");
             GhostLantern.Description.English("Crafted from the remains of a ghost");
+            GhostLantern.Description.Ukrainian("Створено з останків привида");
             GhostLantern.Crafting.Add(CraftingTable.Forge, 1);
             GhostLantern.RequiredItems.Add("TrophyGhost", 1);
             GhostLantern.RequiredItems.Add("Bronze", 3);
@@ -101,7 +113,9 @@ public static class Charms
         if (DragonLantern != null)
         {
             DragonLantern.Name.English("Moder Charm");
+            DragonLantern.Name.Ukrainian("Оберіг Моудер");
             DragonLantern.Description.English("Crafted from the tear of a dragon");
+            DragonLantern.Description.Ukrainian("Створено зі сльози дракона");
             DragonLantern.Crafting.Add(CraftingTable.Forge, 1);
             DragonLantern.RequiredItems.Add("DragonTear", 1);
             DragonLantern.RequiredItems.Add("Bronze", 3);
@@ -115,7 +129,9 @@ public static class Charms
         if (LuckyFoot != null)
         {
             LuckyFoot.Name.English("Lucky Charm");
+            LuckyFoot.Name.Ukrainian("Щасливий оберіг");
             LuckyFoot.Description.English("Crafted from the remains of a hare");
+            LuckyFoot.Description.Ukrainian("Створено з останків зайця");
             LuckyFoot.Crafting.Add(CraftingTable.Forge, 1);
             LuckyFoot.RequiredItems.Add("TrophyHare", 1);
             LuckyFoot.RequiredItems.Add("Bronze", 3);
@@ -129,7 +145,9 @@ public static class Charms
         if (valkyrieLantern != null)
         {
             valkyrieLantern.Name.English("Fallen Charm");
+            valkyrieLantern.Name.Ukrainian("Оберіг полеглої");
             valkyrieLantern.Description.English("Crafted from the remains of a fallen valkyrie");
+            valkyrieLantern.Description.Ukrainian("Створено з останків полеглої валькірії");
             valkyrieLantern.Crafting.Add(CraftingTable.Forge, 1);
             valkyrieLantern.RequiredItems.Add("TrophyFallenValkyrie", 1);
             valkyrieLantern.RequiredItems.Add("Bronze", 3);
