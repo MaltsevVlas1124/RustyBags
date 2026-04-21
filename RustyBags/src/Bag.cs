@@ -71,6 +71,8 @@ public class BagSetup
     public readonly SE_Bag statusEffect;
     public readonly string englishName;
     public readonly ConfigEntry<Restriction>? restrictConfig;
+    public ConfigEntry<Toggle>? showToolsConfig;
+    public ConfigEntry<Toggle>? showLanternsConfig;
 
     public BagSetup(Item item, int width, int height, bool isQuiver = false, bool isOreBag = false, bool replaceShader = true)
     {
@@ -91,6 +93,11 @@ public class BagSetup
         drop.m_itemData.m_dropPrefab = item.Prefab;
         drop.m_itemData.m_shared.m_equipStatusEffect = statusEffect;
         if (!isQuiver) restrictConfig = Configs.config(englishName, "Restrictions", Restriction.None, "Set restrictions");
+        if (!isQuiver)
+        {
+            showToolsConfig = Configs.config(englishName, "Show Tools", Toggle.On, "If off, tools (pickaxe, axe, rod) won't be displayed on this bag");
+            showLanternsConfig = Configs.config(englishName, "Show Lanterns", Toggle.On, "If off, lanterns and charms won't be displayed on this bag");
+        }
         if(replaceShader) MaterialReplacer.RegisterGameObjectForShaderSwap(item.Prefab, MaterialReplacer.ShaderType.CustomCreature);
         bags[sharedName] = this;
     }
@@ -112,6 +119,11 @@ public class BagSetup
         item.m_itemData.m_dropPrefab = item.gameObject;
         item.m_itemData.m_shared.m_equipStatusEffect = statusEffect;
         if (!isQuiver) restrictConfig = Configs.config(englishName, "Restrictions", Restriction.None, "Set restrictions");
+        if (!isQuiver)
+        {
+            showToolsConfig = Configs.config(englishName, "Show Tools", Toggle.On, "If off, tools (pickaxe, axe, rod) won't be displayed on this bag");
+            showLanternsConfig = Configs.config(englishName, "Show Lanterns", Toggle.On, "If off, lanterns and charms won't be displayed on this bag");
+        }
         bags[sharedName] = this;
     }
 
@@ -374,17 +386,20 @@ public class Bag : ItemDrop.ItemData
         }
 
         if (m_bagEquipment == null) return;
-        m_bagEquipment.SetLanternItem(lantern?.m_dropPrefab.name ?? "");
-        m_bagEquipment.SetPickaxeItem(pickaxe?.m_dropPrefab.name ?? "");
-        m_bagEquipment.SetFishingRodItem(fishingRod?.m_dropPrefab.name ?? "");
-        m_bagEquipment.SetCultivatorItem(cultivator?.m_dropPrefab.name ?? "");
-        m_bagEquipment.SetHammerItem(hammer?.m_dropPrefab.name ?? "");
-        m_bagEquipment.SetHoeItem(hoe?.m_dropPrefab.name ?? "");
-        m_bagEquipment.SetMeleeItem(melee?.m_dropPrefab.name ?? "");
-        m_bagEquipment.SetAtgeirItem(atgeir?.m_dropPrefab.name ?? "");
+        BagSetup bagSetup = GetSetup();
+        bool showTools = bagSetup.showToolsConfig?.Value != Toggle.Off;
+        bool showLanterns = bagSetup.showLanternsConfig?.Value != Toggle.Off;
+        m_bagEquipment.SetLanternItem(showLanterns ? (lantern?.m_dropPrefab.name ?? "") : "");
+        m_bagEquipment.SetPickaxeItem(showTools ? (pickaxe?.m_dropPrefab.name ?? "") : "");
+        m_bagEquipment.SetFishingRodItem(showTools ? (fishingRod?.m_dropPrefab.name ?? "") : "");
+        m_bagEquipment.SetCultivatorItem(showTools ? (cultivator?.m_dropPrefab.name ?? "") : "");
+        m_bagEquipment.SetHammerItem(showTools ? (hammer?.m_dropPrefab.name ?? "") : "");
+        m_bagEquipment.SetHoeItem(showTools ? (hoe?.m_dropPrefab.name ?? "") : "");
+        m_bagEquipment.SetMeleeItem(showTools ? (melee?.m_dropPrefab.name ?? "") : "");
+        m_bagEquipment.SetAtgeirItem(showTools ? (atgeir?.m_dropPrefab.name ?? "") : "");
         m_bagEquipment.SetOreItem(ore?.m_dropPrefab.name ?? "", ore?.m_stack ?? 0);
-        m_bagEquipment.SetScytheItem(scythe?.m_dropPrefab.name ?? "");
-        m_bagEquipment.SetHarpoonItem(harpoon?.m_dropPrefab.name ?? "");
+        m_bagEquipment.SetScytheItem(showTools ? (scythe?.m_dropPrefab.name ?? "") : "");
+        m_bagEquipment.SetHarpoonItem(showTools ? (harpoon?.m_dropPrefab.name ?? "") : "");
         m_bagEquipment.UpdateEquipStatusEffect();
     }
 
@@ -402,7 +417,9 @@ public class Bag : ItemDrop.ItemData
         }
         inventory.m_onChanged = OnChanged;
         autoOpen = m_customData.TryGetValue(BAG_AUTO_KEY, out string auto) && bool.TryParse(auto, out bool autoResult) && autoResult;
-        hidden = m_customData.TryGetValue(BAG_HIDE_KEY, out string hide) && bool.TryParse(hide, out bool hideResult) && hideResult;
+        hidden = m_customData.TryGetValue(BAG_HIDE_KEY, out string hide)
+            ? (bool.TryParse(hide, out bool hideResult) && hideResult)
+            : Configs.DefaultBagVisibility.Value == Toggle.Off;
         isLoaded = true;
     }
 

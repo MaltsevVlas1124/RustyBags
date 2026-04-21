@@ -17,6 +17,10 @@ public static class Configs
     private static ConfigEntry<Toggle> _craftFromBag = null!;
     private static ConfigEntry<Toggle> _charmsAffectBag = null!;
 
+    public static ConfigEntry<Toggle> EnableCharmsConfig = null!;
+    public static ConfigEntry<Toggle> ShowGuiButtonsConfig = null!;
+    public static ConfigEntry<Toggle> DefaultBagVisibility = null!;
+
     public static bool AutoStack => _autoStack.Value is Toggle.On;
     public static bool MultipleBags => _multipleBags.Value is Toggle.On;
     public static bool CraftFromBag => _craftFromBag.Value is Toggle.On;
@@ -30,6 +34,9 @@ public static class Configs
         _multipleBags = config("1 - General", "Multiple Bags", Toggle.Off, "If on, player can carry multiple bags");
         _craftFromBag = config("1 - General", "Craft From Bag", Toggle.On, "If on, player can build and craft with equipped bag contents");
         _charmsAffectBag = config("1 - General", "Attachment Bonuses", Toggle.Off, "If on, bag attachments affect bag");
+        EnableCharmsConfig = config("1 - General", "Enable Charms", Toggle.On, "If off, charms will not be loaded into the game.");
+        ShowGuiButtonsConfig = config("1 - General", "Show Bag Buttons", Toggle.On, "Show UI buttons for backpacks.");
+        DefaultBagVisibility = config("1 - General", "Default Bag Visibility", Toggle.On, "Default visibility state of bags when equipped.");
         
         foreach(BagSetup? bagSetup in BagSetup.bags.Values) bagSetup.SetupConfigs();
         SetupWatcher();

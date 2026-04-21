@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using RustyBags.Managers;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -68,6 +69,7 @@ public class BagButtons : MonoBehaviour
 
     public void Show(Bag bag)
     {
+        if (Configs.ShowGuiButtonsConfig.Value == Toggle.Off) return;
         gameObject.SetActive(true);
         hide.SetLabel(bag.hidden ? "$bag_show" : "$bag_hide");
         auto.SetLabel(bag.autoOpen ? "$bag_manual" : "$bag_auto");

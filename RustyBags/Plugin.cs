@@ -52,7 +52,9 @@ namespace RustyBags
             
             Item leatherBag = new Item("bags_bundle", "LeatherBag_RS");
             leatherBag.Name.English("Simple Bag");
+            leatherBag.Name.Ukrainian("Проста торба");
             leatherBag.Description.English("Worn and weathered, this humble pouch once carried the mead of a wandering skald. Its leather still whispers of long journeys and forgotten songs.");
+            leatherBag.Description.Ukrainian("Зношена та пошарпана, ця скромна торба колись носила мед мандрівного скальда. Її шкіра досі шепоче про довгі мандрівки та забуті пісні.");
             leatherBag.RequiredItems.Add("LeatherScraps", 20);
             leatherBag.RequiredItems.Add("DeerHide", 10);
             leatherBag.RequiredItems.Add("Resin", 15);
@@ -74,7 +76,9 @@ namespace RustyBags
             
             Item barrelBag = new Item("bags_bundle", "BarrelBag_RS");
             barrelBag.Name.English("Barrel Bag");
+            barrelBag.Name.Ukrainian("Сумка-діжка");
             barrelBag.Description.English("Repurposed from an old swamp barrel, bound tight with iron hoops. Sturdy, spacious, and surprisingly watertight.");
+            barrelBag.Description.Ukrainian("Перероблена зі старої болотної діжки, міцно стягнута залізними обручами. Міцна, містка та напрочуд водонепроникна.");
             barrelBag.RequiredItems.Add("ElderBark", 10);
             barrelBag.RequiredItems.Add("Iron", 5);
             barrelBag.RequiredItems.Add("Guck", 5);
@@ -100,7 +104,9 @@ namespace RustyBags
             
             Item minerBag = new Item("bags_bundle", "MinerBag_RS");
             minerBag.Name.English("Miner Bag");
+            minerBag.Name.Ukrainian("Шахтарська торба");
             minerBag.Description.English("A treasure chest turned humble pack, still smelling faintly of gold dust and damp stone");
+            minerBag.Description.Ukrainian("Скриня зі скарбами, що перетворилася на скромний рюкзак; вона досі ледь пахне золотим пилом та вогким каменем.");
             minerBag.RequiredItems.Add("ElderBark", 10);
             minerBag.RequiredItems.Add("Iron", 5);
             minerBag.RequiredItems.Add("Guck", 5);
@@ -128,7 +134,9 @@ namespace RustyBags
 
             Item bearBag = new Item("bags_bundle", "UnbjornBag_RS");
             bearBag.Name.English("Wretched Bag");
+            bearBag.Name.Ukrainian("Моторошна торба");
             bearBag.Description.English("Stitched from sinew and bones. Its frame creaks faintly, as though the beast still hungers for the life it lost.");
+            bearBag.Description.Ukrainian("Зшита із сухожиль та кісток. Її каркас ледь чутно скрипить, ніби звір усе ще жадає втраченого життя.");
             bearBag.RequiredItems.Add("TrophyBjornUndead", 1);
             bearBag.RequiredItems.Add("UndeadBjornRibcage", 1);
             bearBag.RequiredItems.Add("LinenThread", 30);
@@ -157,7 +165,9 @@ namespace RustyBags
 
             Item dwarfBag = new Item("bags_bundle", "DvergerBag_RS");
             dwarfBag.Name.English("Dverger Bag");
+            dwarfBag.Name.Ukrainian("Торба дверґа");
             dwarfBag.Description.English("It hums faintly with the heat of forge-fires and the scent of old ale.");
+            dwarfBag.Description.Ukrainian("Вона ледь чутно гуде теплом ковальських печей і пахне старим елем.");
             dwarfBag.RequiredItems.Add("Copper", 15);
             dwarfBag.RequiredItems.Add("Eitr", 10);
             dwarfBag.RequiredItems.Add("YggdrasilWood", 15);
@@ -186,7 +196,9 @@ namespace RustyBags
 
             var quiver = new Item("bags_bundle", "Quiver_RS");
             quiver.Name.English("Simple Quiver");
+            quiver.Name.Ukrainian("Простий сагайдак");
             quiver.Description.English("It bears the scent of the wild. Each arrow drawn carries the spirit of the chase.");
+            quiver.Description.Ukrainian("Він несе в собі запах дикої природи. Кожна витягнута стріла зберігає дух полювання.");
             quiver.RequiredItems.Add("LeatherScraps", 20);
             quiver.RequiredItems.Add("BoneFragments", 10);
             quiver.RequiredItems.Add("DeerHide", 5);
@@ -209,7 +221,9 @@ namespace RustyBags
             
             var mountainQuiver = new Item("bags_bundle", "MountainQuiver_RS");
             mountainQuiver.Name.English("Fur Quiver");
+            mountainQuiver.Name.Ukrainian("Хутряний сагайдак");
             mountainQuiver.Description.English("It bears the scent of the wild. Each arrow drawn carries the spirit of the chase.");
+            mountainQuiver.Description.Ukrainian("Він несе в собі запах дикої природи. Кожна витягнута стріла зберігає дух полювання.");
             mountainQuiver.RequiredItems.Add("WolfPelt", 20);
             mountainQuiver.RequiredItems.Add("Silver", 20);
             mountainQuiver.RequiredItems.Add("BjornHide", 5);
@@ -231,7 +245,9 @@ namespace RustyBags
             
             var CrossbowQuiver = new Item("bags_bundle", "CrossbowQuiver_RS");
             CrossbowQuiver.Name.English("Crossbow Quiver");
+            CrossbowQuiver.Name.Ukrainian("Арбалетний сагайдак");
             CrossbowQuiver.Description.English("Bound in oiled leather and reinforced with brass rings — a quiver fit for a dwarf who favors precision over luck.");
+            CrossbowQuiver.Description.Ukrainian("Обтягнутий промасленою шкірою та посилений латунними кільцями — сагайдак, гідний дверґа, який віддає перевагу точності, а не удачі.");
             CrossbowQuiver.RequiredItems.Add("WolfPelt", 20);
             CrossbowQuiver.RequiredItems.Add("Silver", 20);
             CrossbowQuiver.RequiredItems.Add("BjornHide", 5);
