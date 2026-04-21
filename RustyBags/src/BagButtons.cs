@@ -69,7 +69,7 @@ public class BagButtons : MonoBehaviour
 
     public void Show(Bag bag)
     {
-        if (Configs.ShowGuiButtonsConfig.Value == Toggle.Off) return;
+        if (Configs.ShowGuiButtonsConfig.Value == Managers.Toggle.Off) return;
         gameObject.SetActive(true);
         hide.SetLabel(bag.hidden ? "$bag_show" : "$bag_hide");
         auto.SetLabel(bag.autoOpen ? "$bag_manual" : "$bag_auto");

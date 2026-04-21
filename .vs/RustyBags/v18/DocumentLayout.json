@@ -1,0 +1,201 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\source\\RustyBags\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E0E2F92E-557C-4A05-9D89-AA92A0BD75C4}|RustyBags\\RustyBags.csproj|d:\\source\\rustybags\\rustybags\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{E0E2F92E-557C-4A05-9D89-AA92A0BD75C4}|RustyBags\\RustyBags.csproj|solutionrelative:rustybags\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0E2F92E-557C-4A05-9D89-AA92A0BD75C4}|RustyBags\\RustyBags.csproj|d:\\source\\rustybags\\rustybags\\src\\quiver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E0E2F92E-557C-4A05-9D89-AA92A0BD75C4}|RustyBags\\RustyBags.csproj|solutionrelative:rustybags\\src\\quiver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0E2F92E-557C-4A05-9D89-AA92A0BD75C4}|RustyBags\\RustyBags.csproj|d:\\source\\rustybags\\rustybags\\src\\charms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E0E2F92E-557C-4A05-9D89-AA92A0BD75C4}|RustyBags\\RustyBags.csproj|solutionrelative:rustybags\\src\\charms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0E2F92E-557C-4A05-9D89-AA92A0BD75C4}|RustyBags\\RustyBags.csproj|d:\\source\\rustybags\\rustybags\\plugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E0E2F92E-557C-4A05-9D89-AA92A0BD75C4}|RustyBags\\RustyBags.csproj|solutionrelative:rustybags\\plugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0E2F92E-557C-4A05-9D89-AA92A0BD75C4}|RustyBags\\RustyBags.csproj|D:\\source\\RustyBags\\rustybags\\src\\bag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E0E2F92E-557C-4A05-9D89-AA92A0BD75C4}|RustyBags\\RustyBags.csproj|solutionrelative:rustybags\\src\\bag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0E2F92E-557C-4A05-9D89-AA92A0BD75C4}|RustyBags\\RustyBags.csproj|d:\\source\\rustybags\\rustybags\\src\\bagequipment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E0E2F92E-557C-4A05-9D89-AA92A0BD75C4}|RustyBags\\RustyBags.csproj|solutionrelative:rustybags\\src\\bagequipment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0E2F92E-557C-4A05-9D89-AA92A0BD75C4}|RustyBags\\RustyBags.csproj|d:\\source\\rustybags\\rustybags\\src\\bagcraft.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E0E2F92E-557C-4A05-9D89-AA92A0BD75C4}|RustyBags\\RustyBags.csproj|solutionrelative:rustybags\\src\\bagcraft.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0E2F92E-557C-4A05-9D89-AA92A0BD75C4}|RustyBags\\RustyBags.csproj|D:\\source\\RustyBags\\rustybags\\src\\bagbuttons.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E0E2F92E-557C-4A05-9D89-AA92A0BD75C4}|RustyBags\\RustyBags.csproj|solutionrelative:rustybags\\src\\bagbuttons.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0E2F92E-557C-4A05-9D89-AA92A0BD75C4}|RustyBags\\RustyBags.csproj|D:\\source\\RustyBags\\rustybags\\managers\\configs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E0E2F92E-557C-4A05-9D89-AA92A0BD75C4}|RustyBags\\RustyBags.csproj|solutionrelative:rustybags\\managers\\configs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0E2F92E-557C-4A05-9D89-AA92A0BD75C4}|RustyBags\\RustyBags.csproj|D:\\source\\RustyBags\\rustybags\\environment.props||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{E0E2F92E-557C-4A05-9D89-AA92A0BD75C4}|RustyBags\\RustyBags.csproj|solutionrelative:rustybags\\environment.props||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|RustyBags||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": ".gitignore",
+              "DocumentMoniker": "D:\\source\\RustyBags\\RustyBags\\.gitignore",
+              "RelativeDocumentMoniker": "RustyBags\\.gitignore",
+              "ToolTip": "D:\\source\\RustyBags\\RustyBags\\.gitignore",
+              "RelativeToolTip": "RustyBags\\.gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-21T19:57:40.272Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Quiver.cs",
+              "DocumentMoniker": "D:\\source\\RustyBags\\RustyBags\\src\\Quiver.cs",
+              "RelativeDocumentMoniker": "RustyBags\\src\\Quiver.cs",
+              "ToolTip": "D:\\source\\RustyBags\\RustyBags\\src\\Quiver.cs",
+              "RelativeToolTip": "RustyBags\\src\\Quiver.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T15:20:37.72Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "BagEquipment.cs",
+              "DocumentMoniker": "D:\\source\\RustyBags\\RustyBags\\src\\BagEquipment.cs",
+              "RelativeDocumentMoniker": "RustyBags\\src\\BagEquipment.cs",
+              "ToolTip": "D:\\source\\RustyBags\\RustyBags\\src\\BagEquipment.cs",
+              "RelativeToolTip": "RustyBags\\src\\BagEquipment.cs",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAowFwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T15:06:44.679Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Plugin.cs",
+              "DocumentMoniker": "D:\\source\\RustyBags\\RustyBags\\Plugin.cs",
+              "RelativeDocumentMoniker": "RustyBags\\Plugin.cs",
+              "ToolTip": "D:\\source\\RustyBags\\RustyBags\\Plugin.cs",
+              "RelativeToolTip": "RustyBags\\Plugin.cs",
+              "ViewState": "AgIAAB0BAAAAAAAAAAAqwOoAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T14:43:21.578Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "BagCraft.cs",
+              "DocumentMoniker": "D:\\source\\RustyBags\\RustyBags\\src\\BagCraft.cs",
+              "RelativeDocumentMoniker": "RustyBags\\src\\BagCraft.cs",
+              "ToolTip": "D:\\source\\RustyBags\\RustyBags\\src\\BagCraft.cs",
+              "RelativeToolTip": "RustyBags\\src\\BagCraft.cs",
+              "ViewState": "AgIAAGsAAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T14:42:27.08Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Charms.cs",
+              "DocumentMoniker": "D:\\source\\RustyBags\\RustyBags\\src\\Charms.cs",
+              "RelativeDocumentMoniker": "RustyBags\\src\\Charms.cs",
+              "ToolTip": "D:\\source\\RustyBags\\RustyBags\\src\\Charms.cs",
+              "RelativeToolTip": "RustyBags\\src\\Charms.cs",
+              "ViewState": "AgIAALMAAAAAAAAAAAAAwIYAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T08:04:29.734Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "BagButtons.cs",
+              "DocumentMoniker": "D:\\source\\RustyBags\\RustyBags\\src\\BagButtons.cs",
+              "RelativeDocumentMoniker": "RustyBags\\src\\BagButtons.cs",
+              "ToolTip": "D:\\source\\RustyBags\\RustyBags\\src\\BagButtons.cs",
+              "RelativeToolTip": "RustyBags\\src\\BagButtons.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAwwEcAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T08:04:09.791Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Bag.cs",
+              "DocumentMoniker": "D:\\source\\RustyBags\\RustyBags\\src\\Bag.cs",
+              "RelativeDocumentMoniker": "RustyBags\\src\\Bag.cs",
+              "ToolTip": "D:\\source\\RustyBags\\RustyBags\\src\\Bag.cs",
+              "RelativeToolTip": "RustyBags\\src\\Bag.cs",
+              "ViewState": "AgIAAJkBAAAAAAAAAAAMwKcBAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T08:00:33.182Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Configs.cs",
+              "DocumentMoniker": "D:\\source\\RustyBags\\RustyBags\\Managers\\Configs.cs",
+              "RelativeDocumentMoniker": "RustyBags\\Managers\\Configs.cs",
+              "ToolTip": "D:\\source\\RustyBags\\RustyBags\\Managers\\Configs.cs",
+              "RelativeToolTip": "RustyBags\\Managers\\Configs.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAiwAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T07:59:41.799Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "environment.props",
+              "DocumentMoniker": "D:\\source\\RustyBags\\RustyBags\\environment.props",
+              "RelativeDocumentMoniker": "RustyBags\\environment.props",
+              "ToolTip": "D:\\source\\RustyBags\\RustyBags\\environment.props",
+              "RelativeToolTip": "RustyBags\\environment.props",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2026-04-21T07:34:46.231Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "RustyBags",
+              "DocumentMoniker": "D:\\source\\RustyBags\\RustyBags\\RustyBags.csproj",
+              "RelativeDocumentMoniker": "RustyBags\\RustyBags.csproj",
+              "ToolTip": "D:\\source\\RustyBags\\RustyBags\\RustyBags.csproj",
+              "RelativeToolTip": "RustyBags\\RustyBags.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-04-21T07:33:58.486Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

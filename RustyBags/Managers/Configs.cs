@@ -11,37 +11,38 @@ public enum Toggle { On = 1, Off = 0 }
 
 public static class Configs
 {
-    private static ConfigEntry<Toggle> _serverConfigLocked = null!;
-    private static ConfigEntry<Toggle> _autoStack = null!;
-    private static ConfigEntry<Toggle> _multipleBags = null!;
-    private static ConfigEntry<Toggle> _craftFromBag = null!;
-    private static ConfigEntry<Toggle> _charmsAffectBag = null!;
+    private static ConfigEntry<Managers.Toggle> _serverConfigLocked = null!;
+    private static ConfigEntry<Managers.Toggle> _autoStack = null!;
+    private static ConfigEntry<Managers.Toggle> _multipleBags = null!;
+    private static ConfigEntry<Managers.Toggle> _craftFromBag = null!;
+    private static ConfigEntry<Managers.Toggle> _charmsAffectBag = null!;
 
-    public static ConfigEntry<Toggle> EnableCharmsConfig = null!;
-    public static ConfigEntry<Toggle> ShowGuiButtonsConfig = null!;
-    public static ConfigEntry<Toggle> DefaultBagVisibility = null!;
+    public static ConfigEntry<Managers.Toggle> EnableCharmsConfig = null!;
+    public static ConfigEntry<Managers.Toggle> ShowGuiButtonsConfig = null!;
+    public static ConfigEntry<Managers.Toggle> DefaultBagVisibility = null!;
 
-    public static bool AutoStack => _autoStack.Value is Toggle.On;
-    public static bool MultipleBags => _multipleBags.Value is Toggle.On;
-    public static bool CraftFromBag => _craftFromBag.Value is Toggle.On;
-    public static bool CharmsAffectBag => _charmsAffectBag.Value is Toggle.On;
+    public static bool AutoStack => _autoStack.Value is Managers.Toggle.On;
+    public static bool MultipleBags => _multipleBags.Value is Managers.Toggle.On;
+    public static bool CraftFromBag => _craftFromBag.Value is Managers.Toggle.On;
+    public static bool CharmsAffectBag => _charmsAffectBag.Value is Managers.Toggle.On;
 
     public static void Setup()
     {
-        _serverConfigLocked = config("1 - General", "Lock Configuration", Toggle.On, "If on, the configuration is locked and can be changed by server admins only.");
+        _serverConfigLocked = config("1 - General", "Lock Configuration", Managers.Toggle.On, "If on, the configuration is locked and can be changed by server admins only.");
         _ = RustyBagsPlugin.ConfigSync.AddLockingConfigEntry(_serverConfigLocked);
-        _autoStack = config("1 - General", "Stack Into Bag", Toggle.On, "If on, equipped bag will try to stack items on pickup", false);
-        _multipleBags = config("1 - General", "Multiple Bags", Toggle.Off, "If on, player can carry multiple bags");
-        _craftFromBag = config("1 - General", "Craft From Bag", Toggle.On, "If on, player can build and craft with equipped bag contents");
-        _charmsAffectBag = config("1 - General", "Attachment Bonuses", Toggle.Off, "If on, bag attachments affect bag");
-        EnableCharmsConfig = config("1 - General", "Enable Charms", Toggle.On, "If off, charms will not be loaded into the game.");
-        ShowGuiButtonsConfig = config("1 - General", "Show Bag Buttons", Toggle.On, "Show UI buttons for backpacks.");
-        DefaultBagVisibility = config("1 - General", "Default Bag Visibility", Toggle.On, "Default visibility state of bags when equipped.");
-        
-        foreach(BagSetup? bagSetup in BagSetup.bags.Values) bagSetup.SetupConfigs();
+        _autoStack = config("1 - General", "Stack Into Bag", Managers.Toggle.On, "If on, equipped bag will try to stack items on pickup", false);
+        _multipleBags = config("1 - General", "Multiple Bags", Managers.Toggle.Off, "If on, player can carry multiple bags");
+        _craftFromBag = config("1 - General", "Craft From Bag", Managers.Toggle.On, "If on, player can build and craft with equipped bag contents");
+        _charmsAffectBag = config("1 - General", "Attachment Bonuses", Managers.Toggle.Off, "If on, bag attachments affect bag");
+
+        EnableCharmsConfig = config("1 - General", "Enable Charms", Managers.Toggle.On, "If off, charms will not be loaded into the game.");
+        ShowGuiButtonsConfig = config("1 - General", "Show Bag Buttons", Managers.Toggle.On, "Show UI buttons for backpacks.");
+        DefaultBagVisibility = config("1 - General", "Default Bag Visibility", Managers.Toggle.On, "Default visibility state of bags when equipped.");
+
+        foreach (BagSetup? bagSetup in BagSetup.bags.Values) bagSetup.SetupConfigs();
         SetupWatcher();
     }
-    
+
     private static void SetupWatcher()
     {
         FileSystemWatcher watcher = new(Paths.ConfigPath, RustyBagsPlugin.ConfigFileName);
@@ -77,7 +78,6 @@ public static class Configs
                 (synchronizedSetting ? " [Synced with Server]" : " [Not Synced with Server]"),
                 description.AcceptableValues, description.Tags);
         ConfigEntry<T> configEntry = RustyBagsPlugin.instance.Config.Bind(group, name, value, extendedDescription);
-        //var configEntry = Config.Bind(group, name, value, description);
 
         SyncedConfigEntry<T> syncedConfigEntry = RustyBagsPlugin.ConfigSync.AddConfigEntry(configEntry);
         syncedConfigEntry.SynchronizedConfig = synchronizedSetting;
@@ -101,9 +101,7 @@ public static class Configs
 
     class AcceptableShortcuts : AcceptableValueBase
     {
-        public AcceptableShortcuts() : base(typeof(KeyboardShortcut))
-        {
-        }
+        public AcceptableShortcuts() : base(typeof(KeyboardShortcut)) { }
 
         public override object Clamp(object value) => value;
         public override bool IsValid(object value) => true;

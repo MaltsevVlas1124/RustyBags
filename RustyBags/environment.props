@@ -1,11 +1,20 @@
 <Project>
-    <PropertyGroup>
-        <ValheimGamePath>C:\Program Files (x86)\Steam\steamapps\common\Valheim</ValheimGamePath>
-        <BepInExPath>$(ValheimGamePath)\BepInEx</BepInExPath>
-        <CorlibPath>$(ValheimGamePath)\valheim_Data\Managed</CorlibPath>
-        <PublicizedAssembliesPath>$(ValheimGamePath)\valheim_Data\Managed\publicized_assemblies</PublicizedAssembliesPath>
-        <CopyOutputDLLPath>C:\Users\peima\Desktop\VALHEIM MODDING\projects\RustyBags\RustyBags\Thunderstore</CopyOutputDLLPath>
-        <CopyOutputDLLPath2>C:\Users\peima\AppData\Roaming\com.kesomannen.gale\valheim\profiles\tester\BepInEx\plugins\RustyMods-RustyBags</CopyOutputDLLPath2>
-        <AfterTargets>ILRepacker</AfterTargets> 
-    </PropertyGroup>
+	<PropertyGroup>
+		<!-- Вказуємо шлях до гри. Мод використовує саме змінну GamePath -->
+		<GamePath>C:\Games\Valheim</GamePath>
+
+		<!-- Шлях до BepInEx (для 0Harmony.dll та BepInEx.dll) -->
+		<BepInExPath>C:\Users\UlasuNoka\AppData\Roaming\r2modmanPlus-local\Valheim\profiles\FirtsTry\BepInEx</BepInExPath>
+
+		<!-- Шлях до файлів рушія та гри (UnityEngine.dll тощо) -->
+		<CorlibPath>$(GamePath)\valheim_Data\Managed</CorlibPath>
+
+		<!-- Шлях до публічних збірок (assembly_valheim.dll тощо) -->
+		<PublicizedAssembliesPath>$(GamePath)\valheim_Data\Managed\publicized_assemblies</PublicizedAssembliesPath>
+
+		<!-- Шлях, куди скопіюється готовий мод після збірки (виправив закриваючий тег) -->
+		<CopyOutputDLLPath>C:\Users\UlasuNoka\Desktop\Modding\RustyBags</CopyOutputDLLPath>
+
+		<AfterTargets>ILRepacker</AfterTargets>
+	</PropertyGroup>
 </Project>

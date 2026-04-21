@@ -56,13 +56,13 @@ public class BagSetup
     [Flags]
     public enum Restriction
     {
-        None = 0, 
-        NoMaterials = 1, 
-        NoConsumables = 2, 
-        NoTrophies = 4, 
+        None = 0,
+        NoMaterials = 1,
+        NoConsumables = 2,
+        NoTrophies = 4,
         NoFishes = 8,
     }
-    
+
     public static readonly Dictionary<string, BagSetup> bags = new();
 
     public readonly bool isQuiver;
@@ -71,8 +71,8 @@ public class BagSetup
     public readonly SE_Bag statusEffect;
     public readonly string englishName;
     public readonly ConfigEntry<Restriction>? restrictConfig;
-    public ConfigEntry<Toggle>? showToolsConfig;
-    public ConfigEntry<Toggle>? showLanternsConfig;
+    public ConfigEntry<Managers.Toggle>? showToolsConfig;
+    public ConfigEntry<Managers.Toggle>? showLanternsConfig;
 
     public BagSetup(Item item, int width, int height, bool isQuiver = false, bool isOreBag = false, bool replaceShader = true)
     {
@@ -92,13 +92,14 @@ public class BagSetup
         drop.m_itemData = new Bag(data);
         drop.m_itemData.m_dropPrefab = item.Prefab;
         drop.m_itemData.m_shared.m_equipStatusEffect = statusEffect;
+
         if (!isQuiver) restrictConfig = Configs.config(englishName, "Restrictions", Restriction.None, "Set restrictions");
         if (!isQuiver)
         {
-            showToolsConfig = Configs.config(englishName, "Show Tools", Toggle.On, "If off, tools (pickaxe, axe, rod) won't be displayed on this bag");
-            showLanternsConfig = Configs.config(englishName, "Show Lanterns", Toggle.On, "If off, lanterns and charms won't be displayed on this bag");
+            showToolsConfig = Configs.config(englishName, "Show Tools", Managers.Toggle.On, "If off, tools (pickaxe, axe, rod) won't be displayed on this bag");
+            showLanternsConfig = Configs.config(englishName, "Show Lanterns", Managers.Toggle.On, "If off, lanterns and charms won't be displayed on this bag");
         }
-        if(replaceShader) MaterialReplacer.RegisterGameObjectForShaderSwap(item.Prefab, MaterialReplacer.ShaderType.CustomCreature);
+        if (replaceShader) MaterialReplacer.RegisterGameObjectForShaderSwap(item.Prefab, MaterialReplacer.ShaderType.CustomCreature);
         bags[sharedName] = this;
     }
 
@@ -118,11 +119,12 @@ public class BagSetup
         item.m_itemData = new Bag(data);
         item.m_itemData.m_dropPrefab = item.gameObject;
         item.m_itemData.m_shared.m_equipStatusEffect = statusEffect;
+
         if (!isQuiver) restrictConfig = Configs.config(englishName, "Restrictions", Restriction.None, "Set restrictions");
         if (!isQuiver)
         {
-            showToolsConfig = Configs.config(englishName, "Show Tools", Toggle.On, "If off, tools (pickaxe, axe, rod) won't be displayed on this bag");
-            showLanternsConfig = Configs.config(englishName, "Show Lanterns", Toggle.On, "If off, lanterns and charms won't be displayed on this bag");
+            showToolsConfig = Configs.config(englishName, "Show Tools", Managers.Toggle.On, "If off, tools (pickaxe, axe, rod) won't be displayed on this bag");
+            showLanternsConfig = Configs.config(englishName, "Show Lanterns", Managers.Toggle.On, "If off, lanterns and charms won't be displayed on this bag");
         }
         bags[sharedName] = this;
     }
@@ -144,7 +146,7 @@ public class BagSetup
                     }));
             config.SettingChanged += (_, _) => OnConfigChange();
             OnConfigChange();
-            
+
             void OnConfigChange()
             {
                 string[] values = config.Value.Split('x');
@@ -175,29 +177,29 @@ public class BagSetup
                     a.GetType().Name == "ConfigurationManagerAttributes"
                         ? (bool?)a.GetType().GetField("ReadOnly")?.GetValue(a)
                         : null).FirstOrDefault(v => v != null) ?? false;
-            
+
             var values = ((string)cfg.BoxedValue).Split('x');
             if (values.Length != 2) return;
-            
+
             string widthCfg = values[0].Trim();
             string heightCfg = values[1].Trim();
-            
+
             GUILayout.BeginVertical();
             GUILayout.BeginHorizontal();
             string width = GUILayout.TextField(widthCfg, new GUIStyle(GUI.skin.textField));
             string height = GUILayout.TextField(heightCfg, new GUIStyle(GUI.skin.textField));
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();
-            
+
             if (!locked && (width != widthCfg || height != heightCfg))
             {
                 cfg.BoxedValue = string.Join("x", width, height);
             }
         }
     }
-    
-    [HarmonyPatch(typeof(ItemDrop), nameof(ItemDrop.Awake))]
-    private static class ItemDrop_Awake_Patch 
+
+    [HarmonyPatch(typeof(ItemDrop), "Awake")]
+    private static class ItemDrop_Awake_Patch
     {
         [UsedImplicitly]
         private static void Prefix(ItemDrop __instance)
@@ -215,7 +217,7 @@ public class Bag : ItemDrop.ItemData
     private const string BAG_HIDE_KEY = "RustyBag.CustomData.Hidden";
     private static readonly HashSet<string> lanternNames = new() { "$item_lantern" };
     public static void RegisterLantern(string name) => lanternNames.Add(name);
-    
+
     public BagInventory inventory = new("Bag", null, null, 8, 4);
     public bool isLoaded;
     private readonly float baseWeight;
@@ -225,7 +227,7 @@ public class Bag : ItemDrop.ItemData
     public bool autoOpen;
 
     protected BagEquipment? m_bagEquipment;
-    
+
     public ItemDrop.ItemData? lantern;
     public ItemDrop.ItemData? pickaxe;
     public ItemDrop.ItemData? fishingRod;
@@ -278,13 +280,14 @@ public class Bag : ItemDrop.ItemData
             m_bagEquipment?.SetBagItem(m_dropPrefab.name, hidden);
         }
     }
-    
+
     public void OnEquip(BagEquipment equipment)
     {
         BagGui.m_currentBag = this;
         m_bagEquipment = equipment;
         m_equipped = true;
         Load();
+        UpdateAttachments();
         inventory.m_onChanged = OnChanged; // need to re-bind delegate to hold reference to new m_bagEquipment
     }
 
@@ -333,7 +336,7 @@ public class Bag : ItemDrop.ItemData
         {
             if (lantern != null && fishingRod != null && cultivator != null && hoe != null && hammer != null &&
                 pickaxe != null && melee != null && atgeir != null && ore != null && scythe != null && harpoon != null) break;
-            
+
             ItemDrop.ItemData? item = list[index];
             if (SE_OreBag.ores.Contains(item.m_shared.m_name))
             {
@@ -342,7 +345,7 @@ public class Bag : ItemDrop.ItemData
             }
 
             if (!item.IsEquipable()) continue;
-            
+
             if (lanternNames.Contains(item.m_shared.m_name))
             {
                 lantern ??= item;
@@ -387,8 +390,9 @@ public class Bag : ItemDrop.ItemData
 
         if (m_bagEquipment == null) return;
         BagSetup bagSetup = GetSetup();
-        bool showTools = bagSetup.showToolsConfig?.Value != Toggle.Off;
-        bool showLanterns = bagSetup.showLanternsConfig?.Value != Toggle.Off;
+        bool showTools = bagSetup.showToolsConfig?.Value != Managers.Toggle.Off;
+        bool showLanterns = bagSetup.showLanternsConfig?.Value != Managers.Toggle.Off;
+
         m_bagEquipment.SetLanternItem(showLanterns ? (lantern?.m_dropPrefab.name ?? "") : "");
         m_bagEquipment.SetPickaxeItem(showTools ? (pickaxe?.m_dropPrefab.name ?? "") : "");
         m_bagEquipment.SetFishingRodItem(showTools ? (fishingRod?.m_dropPrefab.name ?? "") : "");
@@ -416,10 +420,12 @@ public class Bag : ItemDrop.ItemData
             UpdateAttachments();
         }
         inventory.m_onChanged = OnChanged;
-        autoOpen = m_customData.TryGetValue(BAG_AUTO_KEY, out string auto) && bool.TryParse(auto, out bool autoResult) && autoResult;
+        autoOpen = m_customData.TryGetValue(BAG_AUTO_KEY, out string auto)
+            ? (bool.TryParse(auto, out bool autoResult) && autoResult)
+            : true;
         hidden = m_customData.TryGetValue(BAG_HIDE_KEY, out string hide)
             ? (bool.TryParse(hide, out bool hideResult) && hideResult)
-            : Configs.DefaultBagVisibility.Value == Toggle.Off;
+            : Configs.DefaultBagVisibility.Value == Managers.Toggle.Off;
         isLoaded = true;
     }
 
@@ -429,7 +435,7 @@ public class Bag : ItemDrop.ItemData
         BagSetup.Size size = setup.sizes.TryGetValue(m_quality, out var s) ? s : setup.sizes[4];
         inventory = new BagInventory("Bag", this, Player.m_localPlayer?.GetInventory().m_bkg, size.width, size.height);
     }
-    
+
     public BagSetup GetSetup() => BagSetup.bags[m_shared.m_name];
 
     public void UpdateWeight()
@@ -450,20 +456,20 @@ public class Bag : ItemDrop.ItemData
         return total;
     }
 
-    [HarmonyPatch(typeof(ItemDrop.ItemData), nameof(GetWeight))]
+    [HarmonyPatch(typeof(ItemDrop.ItemData), "GetWeight")]
     private static class ItemDrop_ItemData_GetWeight_Patch
     {
         [UsedImplicitly]
         private static void Prefix(ItemDrop.ItemData __instance) => (__instance as Bag)?.Load();
     }
-    
-    [HarmonyPatch(typeof(Humanoid), nameof(Humanoid.Pickup))]
+
+    [HarmonyPatch(typeof(Humanoid), "Pickup")]
     private static class Humanoid_Pickup_Transpiler
     {
         [UsedImplicitly]
         private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            MethodInfo? targetMethod = AccessTools.Method(typeof(Inventory), nameof(Inventory.AddItem), new[]{typeof(ItemDrop.ItemData)});
+            MethodInfo? targetMethod = AccessTools.Method(typeof(Inventory), nameof(Inventory.AddItem), new[] { typeof(ItemDrop.ItemData) });
             MethodInfo? newMethod = AccessTools.Method(typeof(Humanoid_Pickup_Transpiler), nameof(AddIntoBag));
 
             return new CodeMatcher(instructions)
@@ -485,14 +491,14 @@ public class Bag : ItemDrop.ItemData
         }
     }
 
-    [HarmonyPatch(typeof(ItemDrop.ItemData), nameof(IsEquipable))]
+    [HarmonyPatch(typeof(ItemDrop.ItemData), "IsEquipable")]
     private static class ItemDrop_IsEquipable_Patch
     {
         [UsedImplicitly]
         private static void Postfix(ItemDrop.ItemData __instance, ref bool __result) => __result |= __instance is Bag;
     }
 
-    [HarmonyPatch(typeof(ItemDrop.ItemData), nameof(GetStatusEffectTooltip))]
+    [HarmonyPatch(typeof(ItemDrop.ItemData), "GetStatusEffectTooltip")]
     private static class ItemDrop_GetStatusEffectTooltip_Patch
     {
         [UsedImplicitly]

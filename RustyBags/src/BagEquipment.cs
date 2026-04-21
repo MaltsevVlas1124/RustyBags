@@ -88,20 +88,23 @@ public class BagEquipment : MonoBehaviour
         StatusEffect? newSE = bag?.m_shared.m_equipStatusEffect;
         m_currentBagItem = bag;
         m_currentBagItem?.OnEquip(this);
-        
+
         SetBagItem(m_currentBagItem?.m_dropPrefab.name ?? "", m_currentBagItem?.hidden ?? true);
-        
-        SetLanternItem(m_currentBagItem?.lantern?.m_dropPrefab.name ?? "");
-        SetPickaxeItem(m_currentBagItem?.pickaxe?.m_dropPrefab.name ?? "");
-        SetFishingRodItem(m_currentBagItem?.fishingRod?.m_dropPrefab.name ?? "");
-        SetCultivatorItem(m_currentBagItem?.cultivator?.m_dropPrefab.name ?? "");
-        SetHammerItem(m_currentBagItem?.hammer?.m_dropPrefab.name ?? "");
-        SetMeleeItem(m_currentBagItem?.melee?.m_dropPrefab.name ?? "");
-        SetHoeItem(m_currentBagItem?.hoe?.m_dropPrefab.name ?? "");
-        SetAtgeirItem(m_currentBagItem?.atgeir?.m_dropPrefab.name ?? "");
-        SetOreItem(m_currentBagItem?.ore?.m_dropPrefab.name ?? "", m_currentBagItem?.ore?.m_stack ?? 0);
-        SetScytheItem(m_currentBagItem?.scythe?.m_dropPrefab.name ?? "");
-        SetHarpoonItem(m_currentBagItem?.harpoon?.m_dropPrefab.name ?? "");
+
+        if (m_currentBagItem == null)
+        {
+            SetLanternItem("");
+            SetPickaxeItem("");
+            SetFishingRodItem("");
+            SetCultivatorItem("");
+            SetHammerItem("");
+            SetMeleeItem("");
+            SetHoeItem("");
+            SetAtgeirItem("");
+            SetOreItem("", 0);
+            SetScytheItem("");
+            SetHarpoonItem("");
+        }
 
         SetupEquipStatusEffect(oldSE, newSE, m_currentBagItem?.m_quality ?? 1, m_currentBagItem?.lantern?.GetCharmData());
         return true;
