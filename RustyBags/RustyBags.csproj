@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Import Project="environment.props" />
@@ -149,6 +149,8 @@
     <Compile Include="src\SE_Bag.cs" />
     <Compile Include="src\Charms.cs" />
     <Compile Include="Utilities\Dir.cs" />
+    <Compile Include="src\Constants.cs" />
+    <Compile Include="src\ItemRegistrar.cs" />
     <Compile Include="Utilities\Keys.cs" />
     <Compile Include="VersionHandshake.cs" />
   </ItemGroup>
@@ -157,6 +159,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <EmbeddedResource Include="translations\English.yml">
+      <LogicalName>RustyBags.translations.English.yml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="translations\Ukrainian.yml">
+      <LogicalName>RustyBags.translations.Ukrainian.yml</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="assets\RustyBags.assets.bags_bundle">
       <LogicalName>RustyBags.assets.bags_bundle</LogicalName>
     </EmbeddedResource>
