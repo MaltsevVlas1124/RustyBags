@@ -122,7 +122,7 @@ public class Localizer
 
         localizationLanguage.Add(__instance, language);
 
-        // Find all localization files in the plugin directory
+        // Collect localization files on disk (disk takes priority over embedded resources)
         Dictionary<string, string> localizationFiles = new();
         foreach (string file in Directory
                      .GetFiles(Path.GetDirectoryName(Paths.PluginPath)!, $"{plugin.Info.Metadata.Name}.*",
@@ -141,131 +141,71 @@ public class Localizer
             }
         }
 
-        // Require English file on disk
-        if (!localizationFiles.TryGetValue("English", out string englishFile))
+        // Load English from embedded resource (always available as bundled fallback)
+        if (LoadTranslationFromAssembly("English") is not { } englishAssemblyData)
         {
             throw new Exception(
-                $"Found no English localizations in mod {plugin.Info.Metadata.Name}. Expected a file like {plugin.Info.Metadata.Name}.English.json or .yml.");
+                $"Found no English localizations in mod {plugin.Info.Metadata.Name}. Expected an embedded resource translations/English.json or translations/English.yml.");
         }
 
-        // Load English first
         var deserializer = new DeserializerBuilder().IgnoreFields().Build();
-        Dictionary<string, string>? localizationTexts =
-            deserializer.Deserialize<Dictionary<string, string>?>(File.ReadAllText(englishFile));
+        Dictionary<string, string>? localizationTexts = deserializer
+            .Deserialize<Dictionary<string, string>?>(System.Text.Encoding.UTF8.GetString(englishAssemblyData));
 
         if (localizationTexts is null)
         {
             throw new Exception(
-                $"Localization for mod {plugin.Info.Metadata.Name} failed: English localization file was empty.");
+                $"Localization for mod {plugin.Info.Metadata.Name} failed: Embedded English localization file was empty.");
         }
 
-        // If requested language is not English, try load it from disk
-        string? localizationData = null;
-        if (language != "English" && localizationFiles.TryGetValue(language, out string langFile))
+        // Allow disk English to override embedded English
+        if (localizationFiles.TryGetValue("English", out string diskEnglishFile))
         {
-            localizationData = File.ReadAllText(langFile);
-        }
-
-        if (localizationData is not null)
-        {
-            foreach (var kv in deserializer.Deserialize<Dictionary<string, string>?>(localizationData)
-                              ?? new Dictionary<string, string>())
+            foreach (KeyValuePair<string, string> kv in deserializer
+                         .Deserialize<Dictionary<string, string>?>(File.ReadAllText(diskEnglishFile))
+                     ?? new Dictionary<string, string>())
             {
                 localizationTexts[kv.Key] = kv.Value;
             }
         }
 
+        // If language is not English, try disk file first then embedded resource
+        if (language != "English")
+        {
+            string? localizationData = null;
+            if (localizationFiles.TryGetValue(language, out string langFile))
+            {
+                localizationData = File.ReadAllText(langFile);
+            }
+            else if (LoadTranslationFromAssembly(language) is { } languageAssemblyData)
+            {
+                localizationData = System.Text.Encoding.UTF8.GetString(languageAssemblyData);
+            }
+
+            if (localizationData is not null)
+            {
+                foreach (KeyValuePair<string, string> kv in deserializer
+                             .Deserialize<Dictionary<string, string>?>(localizationData)
+                         ?? new Dictionary<string, string>())
+                {
+                    localizationTexts[kv.Key] = kv.Value;
+                }
+            }
+        }
+
         loadedTexts[language] = localizationTexts;
 
-        foreach (var s in localizationTexts)
+        foreach (KeyValuePair<string, string> s in localizationTexts)
         {
             UpdatePlaceholderText(__instance, s.Key);
         }
     }
 
-
-    // private static void LoadLocalization(Localization __instance, string language)
-    // {
-    //     if (!localizationLanguage.Remove(__instance))
-    //     {
-    //         localizationObjects.Add(new WeakReference<Localization>(__instance));
-    //     }
-    //
-    //     localizationLanguage.Add(__instance, language);
-    //
-    //     Dictionary<string, string> localizationFiles = new();
-    //     foreach (string file in Directory
-    //                  .GetFiles(Path.GetDirectoryName(Paths.PluginPath)!, $"{plugin.Info.Metadata.Name}.*",
-    //                      SearchOption.AllDirectories).Where(f => fileExtensions.IndexOf(Path.GetExtension(f)) >= 0))
-    //     {
-    //         string key = Path.GetFileNameWithoutExtension(file).Split('.')[1];
-    //         if (localizationFiles.ContainsKey(key))
-    //         {
-    //             // Handle duplicate key
-    //             UnityEngine.Debug.LogWarning(
-    //                 $"Duplicate key {key} found for {plugin.Info.Metadata.Name}. The duplicate file found at {file} will be skipped.");
-    //         }
-    //         else
-    //         {
-    //             localizationFiles[key] = file;
-    //         }
-    //     }
-    //
-    //     if (LoadTranslationFromAssembly("English") is not { } englishAssemblyData)
-    //     {
-    //         throw new Exception(
-    //             $"Found no English localizations in mod {plugin.Info.Metadata.Name}. Expected an embedded resource translations/English.json or translations/English.yml.");
-    //     }
-    //
-    //     Dictionary<string, string>? localizationTexts = new DeserializerBuilder().IgnoreFields().Build()
-    //         .Deserialize<Dictionary<string, string>?>(System.Text.Encoding.UTF8.GetString(englishAssemblyData));
-    //     if (localizationTexts is null)
-    //     {
-    //         throw new Exception(
-    //             $"Localization for mod {plugin.Info.Metadata.Name} failed: Localization file was empty.");
-    //     }
-    //
-    //     string? localizationData = null;
-    //     if (language != "English")
-    //     {
-    //         if (localizationFiles.ContainsKey(language))
-    //         {
-    //             localizationData = File.ReadAllText(localizationFiles[language]);
-    //         }
-    //         else if (LoadTranslationFromAssembly(language) is { } languageAssemblyData)
-    //         {
-    //             localizationData = System.Text.Encoding.UTF8.GetString(languageAssemblyData);
-    //         }
-    //     }
-    //
-    //     if (localizationData is null && localizationFiles.ContainsKey("English"))
-    //     {
-    //         localizationData = File.ReadAllText(localizationFiles["English"]);
-    //     }
-    //
-    //     if (localizationData is not null)
-    //     {
-    //         foreach (KeyValuePair<string, string> kv in new DeserializerBuilder().IgnoreFields().Build()
-    //                                                         .Deserialize<Dictionary<string, string>
-    //                                                             ?>(localizationData) ??
-    //                                                     new Dictionary<string, string>())
-    //         {
-    //             localizationTexts[kv.Key] = kv.Value;
-    //         }
-    //     }
-    //
-    //     loadedTexts[language] = localizationTexts;
-    //     foreach (KeyValuePair<string, string> s in localizationTexts)
-    //     {
-    //         UpdatePlaceholderText(__instance, s.Key);
-    //     }
-    // }
-
     static Localizer()
     {
         Harmony harmony = new("org.bepinex.helpers.LocalizationManager");
         harmony.Patch(AccessTools.DeclaredMethod(typeof(Localization), nameof(Localization.LoadCSV)),
-            postfix: new HarmonyMethod(AccessTools.DeclaredMethod(typeof(Localizer), nameof(LoadLocalization))));
+            postfix: new HarmonyMethod(AccessTools.DeclaredMethod(typeof(Localizer), nameof(LoadLocalization))) { priority = Priority.Last });
     }
 
     private static byte[]? LoadTranslationFromAssembly(string language)

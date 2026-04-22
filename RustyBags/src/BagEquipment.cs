@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using HarmonyLib;
 using JetBrains.Annotations;
 using RustyBags.Managers;
@@ -167,53 +167,19 @@ public class BagEquipment : MonoBehaviour
         se.SetBag(m_currentBagItem);
     }
 
-    public void SetFishingRodItem(string item)
+    private void SetSimpleItem(ref string field, string item, int zdoKey)
     {
-        m_fishingRodItem = item;
+        field = item;
         if (m_nview.GetZDO() == null || !m_nview.IsOwner()) return;
-        int fishingRodHash = string.IsNullOrEmpty(item) ? 0 : item.GetStableHashCode();
-        m_nview.GetZDO().Set(BagVars.FishingRod, fishingRodHash);
+        m_nview.GetZDO().Set(zdoKey, string.IsNullOrEmpty(item) ? 0 : item.GetStableHashCode());
     }
 
-    public void SetCultivatorItem(string item)
-    {
-        m_cultivatorItem = item;
-        if (m_nview.GetZDO() == null || !m_nview.IsOwner()) return;
-        int cultivatorHash = string.IsNullOrEmpty(item) ? 0 : item.GetStableHashCode();
-        m_nview.GetZDO().Set(BagVars.Cultivator, cultivatorHash);
-    }
-
-    public void SetHammerItem(string item)
-    {
-        m_hammerItem = item;
-        if (m_nview.GetZDO() == null || !m_nview.IsOwner()) return;
-        int hammerHash = string.IsNullOrEmpty(item) ? 0 : item.GetStableHashCode();
-        m_nview.GetZDO().Set(BagVars.Hammer, hammerHash);
-    }
-
-    public void SetMeleeItem(string item)
-    {
-        m_meleeItem = item;
-        if (m_nview.GetZDO() == null || !m_nview.IsOwner()) return;
-        int meleeHash = string.IsNullOrEmpty(item) ? 0 : item.GetStableHashCode();
-        m_nview.GetZDO().Set(BagVars.Melee, meleeHash);
-    }
-
-    public void SetAtgeirItem(string item)
-    {
-        m_atgeirItem = item;
-        if (m_nview.GetZDO() == null || !m_nview.IsOwner()) return;
-        int atgeirHash = string.IsNullOrEmpty(item) ? 0 : item.GetStableHashCode();
-        m_nview.GetZDO().Set(BagVars.Atgeir, atgeirHash);
-    }
-
-    public void SetHoeItem(string item)
-    {
-        m_hoeItem = item;
-        int hoeHash = string.IsNullOrEmpty(item) ? 0 : item.GetStableHashCode();
-        if (m_nview.GetZDO() == null || !m_nview.IsOwner()) return;
-        m_nview.GetZDO().Set(BagVars.Hoe, hoeHash);
-    }
+    public void SetFishingRodItem(string item) => SetSimpleItem(ref m_fishingRodItem, item, BagVars.FishingRod);
+    public void SetCultivatorItem(string item) => SetSimpleItem(ref m_cultivatorItem, item, BagVars.Cultivator);
+    public void SetHammerItem(string item) => SetSimpleItem(ref m_hammerItem, item, BagVars.Hammer);
+    public void SetMeleeItem(string item) => SetSimpleItem(ref m_meleeItem, item, BagVars.Melee);
+    public void SetAtgeirItem(string item) => SetSimpleItem(ref m_atgeirItem, item, BagVars.Atgeir);
+    public void SetHoeItem(string item) => SetSimpleItem(ref m_hoeItem, item, BagVars.Hoe);
 
     public void SetQuiverItem(string item, bool hidden)
     {
@@ -243,21 +209,8 @@ public class BagEquipment : MonoBehaviour
         m_nview.GetZDO().Set(BagVars.Bag, bagHash);
     }
     
-    public void SetLanternItem(string item)
-    {
-        m_lanternItem = item;
-        if (m_nview.GetZDO() == null || !m_nview.IsOwner()) return;
-        int lanternHash = string.IsNullOrEmpty(item) ? 0 : item.GetStableHashCode();
-        m_nview.GetZDO().Set(BagVars.Lantern, lanternHash);
-    }
-
-    public void SetPickaxeItem(string item)
-    {
-        m_pickaxeItem = item;
-        if (m_nview.GetZDO() == null || !m_nview.IsOwner()) return;
-        int pickaxeHash = string.IsNullOrEmpty(item) ? 0 : item.GetStableHashCode();
-        m_nview.GetZDO().Set(BagVars.Pickaxe, pickaxeHash);
-    }
+    public void SetLanternItem(string item) => SetSimpleItem(ref m_lanternItem, item, BagVars.Lantern);
+    public void SetPickaxeItem(string item) => SetSimpleItem(ref m_pickaxeItem, item, BagVars.Pickaxe);
 
     public void SetOreItem(string item, int stack)
     {
@@ -269,21 +222,8 @@ public class BagEquipment : MonoBehaviour
         m_nview.GetZDO().Set(BagVars.OreStack, stack);
     }
 
-    public void SetScytheItem(string item)
-    {
-        m_scytheItem = item;
-        if (m_nview.GetZDO() == null || !m_nview.IsOwner()) return;
-        int scythHash = string.IsNullOrEmpty(item) ? 0 : item.GetStableHashCode();
-        m_nview.GetZDO().Set(BagVars.Scyth, scythHash);
-    }
-
-    public void SetHarpoonItem(string item)
-    {
-        m_harpoonItem = item;
-        if (m_nview.GetZDO() == null || !m_nview.IsOwner()) return;
-        int harpoonHash = string.IsNullOrEmpty(item) ? 0 : item.GetStableHashCode();
-        m_nview.GetZDO().Set(BagVars.Harpoon, harpoonHash);
-    }
+    public void SetScytheItem(string item) => SetSimpleItem(ref m_scytheItem, item, BagVars.Scyth);
+    public void SetHarpoonItem(string item) => SetSimpleItem(ref m_harpoonItem, item, BagVars.Harpoon);
     
     private static GameObject? AttachItem(int hash, Transform joint)
     {
@@ -340,7 +280,7 @@ public class BagEquipment : MonoBehaviour
         ResetAttachHashes();
         if (hash == 0) return;
         m_bagInstance = m_visEquipment.AttachItem(hash, 0, m_visEquipment.m_backShield);
-        if (m_bagInstance.transform.Find("hide") is {} hideOnEquip) hideOnEquip.gameObject.SetActive(false);
+        if (m_bagInstance.transform.Find(Constants.HideOnEquip) is {} hideOnEquip) hideOnEquip.gameObject.SetActive(false);
     }
 
     public void SetQuiverEquipped(int hash)
@@ -357,68 +297,25 @@ public class BagEquipment : MonoBehaviour
         m_currentQuiverHash = hash;
         if (hash == 0) return;
         m_quiverInstance = m_visEquipment.AttachItem(hash, 0, m_visEquipment.m_backShield);
-        if (m_quiverInstance.transform.Find("hide") is {} hideOnEquip) hideOnEquip.gameObject.SetActive(false);
+        if (m_quiverInstance.transform.Find(Constants.HideOnEquip) is {} hideOnEquip) hideOnEquip.gameObject.SetActive(false);
     }
 
-    public void SetHammerEquipped(int hash)
+    private void SetAttachEquipped(ref int currentHash, ref GameObject? instance, int hash, string attachPointName)
     {
-        if (m_currentHammerHash == hash || m_bagInstance == null) return;
-        if (m_hammerInstance) Destroy(m_hammerInstance);
-        m_hammerInstance = null;
-        m_currentHammerHash = hash;
-        if (hash == 0 || m_bagInstance.transform.Find("attach_hammer") is not { } attachHammer) return;
-        m_hammerInstance = AttachItem(hash, attachHammer);
+        if (currentHash == hash || m_bagInstance == null) return;
+        if (instance) Destroy(instance);
+        instance = null;
+        currentHash = hash;
+        if (hash == 0 || m_bagInstance.transform.Find(attachPointName) is not { } attach) return;
+        instance = AttachItem(hash, attach);
     }
 
-    public void SetAtgeirEquipped(int hash)
-    {
-        if (m_currentAtgeirHash == hash || m_bagInstance == null) return;
-        if (m_atgeirInstance) Destroy(m_atgeirInstance);
-        m_atgeirInstance = null;
-        m_currentAtgeirHash = hash;
-        if (hash == 0 || m_bagInstance.transform.Find("attach_atgeir") is not { } attachAtgeir) return;
-        m_atgeirInstance = AttachItem(hash, attachAtgeir);
-    }
-
-    public void SetHarpoonEquipped(int hash)
-    {
-        if (m_currentHarpoonHash == hash || m_bagInstance == null) return;
-        if (m_harpoonInstance) Destroy(m_harpoonInstance);
-        m_harpoonInstance = null;
-        m_currentHarpoonHash = hash;
-        if (hash == 0 || m_bagInstance.transform.Find("attach_harpoon") is not { } attachHarpoon) return;
-        m_harpoonInstance = AttachItem(hash, attachHarpoon);
-    }
-
-    public void SetMeleeEquipped(int hash)
-    {
-        if (m_currentMeleeHash == hash || m_bagInstance == null) return;
-        if (m_meleeInstance) Destroy(m_meleeInstance);
-        m_meleeInstance = null;
-        m_currentMeleeHash = hash;
-        if (hash == 0 || m_bagInstance.transform.Find("attach_melee") is not { } attachMelee) return;
-        m_meleeInstance = AttachItem(hash, attachMelee);
-    }
-
-    public void SetHoeEquipped(int hash)
-    {
-        if (m_currentHoeHash == hash || m_bagInstance == null) return;
-        if (m_hoeInstance) Destroy(m_hoeInstance);
-        m_hoeInstance = null;
-        m_currentHoeHash = hash;
-        if (hash == 0 || m_bagInstance.transform.Find("attach_hoe") is not { } attachHoe) return;
-        m_hoeInstance = AttachItem(hash, attachHoe);
-    }
-
-    public void SetFishingRodEquipped(int hash)
-    {
-        if (m_currentFishingRodHash == hash || m_bagInstance == null) return;
-        if (m_fishingRodInstance) Destroy(m_fishingRodInstance);
-        m_fishingRodInstance = null;
-        m_currentFishingRodHash = hash;
-        if (hash == 0 || m_bagInstance.transform.Find("attach_fishingrod") is not { } attachFishingRod) return;
-        m_fishingRodInstance = AttachItem(hash, attachFishingRod);
-    }
+    public void SetHammerEquipped(int hash) => SetAttachEquipped(ref m_currentHammerHash, ref m_hammerInstance, hash, Constants.AttachHammer);
+    public void SetAtgeirEquipped(int hash) => SetAttachEquipped(ref m_currentAtgeirHash, ref m_atgeirInstance, hash, Constants.AttachAtgeir);
+    public void SetHarpoonEquipped(int hash) => SetAttachEquipped(ref m_currentHarpoonHash, ref m_harpoonInstance, hash, Constants.AttachHarpoon);
+    public void SetMeleeEquipped(int hash) => SetAttachEquipped(ref m_currentMeleeHash, ref m_meleeInstance, hash, Constants.AttachMelee);
+    public void SetHoeEquipped(int hash) => SetAttachEquipped(ref m_currentHoeHash, ref m_hoeInstance, hash, Constants.AttachHoe);
+    public void SetFishingRodEquipped(int hash) => SetAttachEquipped(ref m_currentFishingRodHash, ref m_fishingRodInstance, hash, Constants.AttachFishingRod);
     
     public void SetLanternEquipped(int hash)
     {
@@ -427,39 +324,13 @@ public class BagEquipment : MonoBehaviour
         if (m_lanternInstance) Destroy(m_lanternInstance);
         m_lanternInstance = null;
         m_currentLanternHash = hash;
-        if (hash == 0 || m_bagInstance.transform.Find("attach_lantern") is not { } attachLantern) return;
+        if (hash == 0 || m_bagInstance.transform.Find(Constants.AttachLantern) is not { } attachLantern) return;
         m_lanternInstance = m_visEquipment.AttachItem(hash, 0, attachLantern);
     }
 
-    public void SetPickaxeEquipped(int hash)
-    {
-        if (m_currentPickaxeHash == hash || m_bagInstance == null) return;
-        if (m_pickaxeInstance) Destroy(m_pickaxeInstance);
-        m_pickaxeInstance = null;
-        m_currentPickaxeHash = hash;
-        if (hash == 0 || m_bagInstance.transform.Find("attach_pickaxe") is not {} attachPickaxe) return;
-        m_pickaxeInstance = AttachItem(hash, attachPickaxe);
-    }
-
-    public void SetScytheEquipped(int hash)
-    {
-        if (m_currentScythHash == hash || m_bagInstance == null) return;
-        if (m_scythInstance) Destroy(m_scythInstance);
-        m_scythInstance = null;
-        m_currentScythHash = hash;
-        if (hash == 0 || m_bagInstance.transform.Find("attach_scyth") is not { } attachScyth) return;
-        m_scythInstance = AttachItem(hash, attachScyth);
-    }
-
-    public void SetCultivatorEquipped(int hash)
-    {
-        if (m_currentCultivatorHash == hash || m_bagInstance == null) return;
-        if (m_cultivatorInstance) Destroy(m_cultivatorInstance);
-        m_cultivatorInstance = null;
-        m_currentCultivatorHash = hash;
-        if (hash == 0 || m_bagInstance.transform.Find("attach_cultivator") is not { } attachCultivator) return;
-        m_cultivatorInstance = AttachItem(hash, attachCultivator);
-    }
+    public void SetPickaxeEquipped(int hash) => SetAttachEquipped(ref m_currentPickaxeHash, ref m_pickaxeInstance, hash, Constants.AttachPickaxe);
+    public void SetScytheEquipped(int hash) => SetAttachEquipped(ref m_currentScythHash, ref m_scythInstance, hash, Constants.AttachScythe);
+    public void SetCultivatorEquipped(int hash) => SetAttachEquipped(ref m_currentCultivatorHash, ref m_cultivatorInstance, hash, Constants.AttachCultivator);
 
     public void ClearArrowInstances()
     {
@@ -490,7 +361,7 @@ public class BagEquipment : MonoBehaviour
         m_currentArrowHash = hash;
         m_currentArrowStack = stack;
 
-        if (hash == 0 || m_quiverInstance.transform.Find("attach_arrows") is not { } arrows)
+        if (hash == 0 || m_quiverInstance.transform.Find(Constants.AttachArrows) is not { } arrows)
         {
             ClearArrowInstances();
             return;
@@ -602,16 +473,16 @@ public class BagEquipment : MonoBehaviour
         m_currentOreStack = stack;
         bool open = stack > 0;
         
-        if (hash == 0 || m_bagInstance.transform.Find("attach_ores") is not { } ores)
+        if (hash == 0 || m_bagInstance.transform.Find(Constants.AttachOres) is not { } ores)
         {
             ClearOreInstances();
-            m_bagInstance.transform.Find("open")?.gameObject.SetActive(false);
-            m_bagInstance.transform.Find("closed")?.gameObject.SetActive(true);
+            m_bagInstance.transform.Find(Constants.OreOpenState)?.gameObject.SetActive(false);
+            m_bagInstance.transform.Find(Constants.OreClosedState)?.gameObject.SetActive(true);
             return;
         }
 
-        m_bagInstance.transform.Find("open")?.gameObject.SetActive(open);
-        m_bagInstance.transform.Find("closed")?.gameObject.SetActive(!open);
+        m_bagInstance.transform.Find(Constants.OreOpenState)?.gameObject.SetActive(open);
+        m_bagInstance.transform.Find(Constants.OreClosedState)?.gameObject.SetActive(!open);
         
         GameObject? model = ObjectDB.instance.GetItemPrefab(hash)?.transform.GetChild(0)?.gameObject;
         if (model == null)
