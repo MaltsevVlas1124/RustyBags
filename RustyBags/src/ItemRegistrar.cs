@@ -34,11 +34,11 @@ internal static class ItemRegistrar
         leatherBag.RequiredUpgradeItems.Add("DeerHide", 5, 4);
         leatherBag.RequiredUpgradeItems.Add("Bronze", 5, 4);
         leatherBag.Crafting.Add(CraftingTable.Workbench, 1);
-        BagSetup setup = new BagSetup(leatherBag, 5, 2);
-        setup.AddSizePerQuality(6, 2, 2);
-        setup.AddSizePerQuality(7, 2, 3);
-        setup.AddSizePerQuality(8, 2, 4);
-        setup.statusEffect.m_baseCarryWeight = 25f;
+        BagSetup leatherSetup = new BagSetup(leatherBag, 5, 2);
+        leatherSetup.AddSizePerQuality(6, 2, 2);
+        leatherSetup.AddSizePerQuality(7, 2, 3);
+        leatherSetup.AddSizePerQuality(8, 2, 4);
+        leatherSetup.statusEffect.m_baseCarryWeight = 25f;
     }
 
     private static void RegisterBarrelBag()
@@ -63,18 +63,18 @@ internal static class ItemRegistrar
         barrelBag.RequiredUpgradeItems.Add("WolfClaw", 3, 4);
         barrelBag.RequiredUpgradeItems.Add("WolfHairBundle", 2, 4);
         barrelBag.Crafting.Add(CraftingTable.Forge, 1);
-        BagSetup setup = new BagSetup(barrelBag, 8, 2);
-        setup.AddSizePerQuality(8, 3, 2);
-        setup.AddSizePerQuality(8, 4, 3);
-        setup.AddSizePerQuality(8, 5, 4);
-        setup.statusEffect.m_baseCarryWeight = 50f;
+        BagSetup barrelSetup = new BagSetup(barrelBag, 8, 2);
+        barrelSetup.AddSizePerQuality(8, 3, 2);
+        barrelSetup.AddSizePerQuality(8, 4, 3);
+        barrelSetup.AddSizePerQuality(8, 5, 4);
+        barrelSetup.statusEffect.m_baseCarryWeight = 50f;
     }
 
     private static void RegisterMinerBag()
     {
         Item minerBag = new Item(Constants.BagsBundle, Constants.MinerBagPrefab);
         minerBag.Name.English("Miner Bag");
-        minerBag.Description.English("A treasure chest turned humble pack, still smelling faintly of gold dust and damp stone");
+        minerBag.Description.English("A treasure chest turned humble pack, still smelling faintly of gold dust and damp stone.");
         minerBag.RequiredItems.Add("ElderBark", 10);
         minerBag.RequiredItems.Add("Iron", 5);
         minerBag.RequiredItems.Add("Guck", 5);
@@ -92,13 +92,13 @@ internal static class ItemRegistrar
         minerBag.RequiredUpgradeItems.Add("WolfClaw", 3, 4);
         minerBag.RequiredUpgradeItems.Add("WolfHairBundle", 2, 4);
         minerBag.Crafting.Add(CraftingTable.Forge, 1);
-        BagSetup setup = new BagSetup(minerBag, 6, 2, replaceShader: false, isOreBag: true);
-        setup.AddSizePerQuality(7, 3, 2);
-        setup.AddSizePerQuality(7, 4, 3);
-        setup.AddSizePerQuality(8, 4, 4);
-        setup.statusEffect.m_speedModifier = -0.1f;
-        setup.statusEffect.m_baseCarryWeight = 50f;
-        setup.statusEffect.m_inventoryWeightModifier = 0.5f;
+        BagSetup minerSetup = new BagSetup(minerBag, 6, 2, replaceShader: false, isOreBag: true);
+        minerSetup.AddSizePerQuality(7, 3, 2);
+        minerSetup.AddSizePerQuality(7, 4, 3);
+        minerSetup.AddSizePerQuality(8, 4, 4);
+        minerSetup.statusEffect.m_speedModifier = -0.1f;
+        minerSetup.statusEffect.m_baseCarryWeight = 50f;
+        minerSetup.statusEffect.m_inventoryWeightModifier = 0.5f;
     }
 
     private static void RegisterBearBag()
@@ -123,11 +123,11 @@ internal static class ItemRegistrar
         bearBag.RequiredUpgradeItems.Add("Flax", 40, 4);
         bearBag.RequiredUpgradeItems.Add("LoxPelt", 20, 4);
         bearBag.Crafting.Add(CraftingTable.Workbench, 1);
-        BagSetup setup = new BagSetup(bearBag, 8, 5);
-        setup.AddSizePerQuality(8, 6, 2);
-        setup.AddSizePerQuality(8, 7, 3);
-        setup.AddSizePerQuality(8, 8, 4);
-        setup.statusEffect.m_baseCarryWeight = 75f;
+        BagSetup bearSetup = new BagSetup(bearBag, 8, 5);
+        bearSetup.AddSizePerQuality(8, 6, 2);
+        bearSetup.AddSizePerQuality(8, 7, 3);
+        bearSetup.AddSizePerQuality(8, 8, 4);
+        bearSetup.statusEffect.m_baseCarryWeight = 75f;
         ModelReplacer bearReplacement = new ModelReplacer(bearBag.Prefab);
         bearReplacement.Add("attach/model/bear/default", new ModelReplacer.ReplacementInfo("TrophyBjornUndead", "attach/default"));
         bearReplacement.Add("attach/model/bear/model", new ModelReplacer.ReplacementInfo("UndeadBjornRibcage", "model"));
@@ -155,11 +155,11 @@ internal static class ItemRegistrar
         dwarfBag.RequiredUpgradeItems.Add("CharredBone", 20, 4);
         dwarfBag.RequiredUpgradeItems.Add("YggdrasilWood", 6, 4);
         dwarfBag.Crafting.Add(CraftingTable.BlackForge, 1);
-        BagSetup setup = new BagSetup(dwarfBag, 8, 8);
-        setup.AddSizePerQuality(8, 9, 2);
-        setup.AddSizePerQuality(8, 10, 3);
-        setup.AddSizePerQuality(8, 11, 4);
-        setup.statusEffect.m_baseCarryWeight = 100f;
+        BagSetup dwarfSetup = new BagSetup(dwarfBag, 8, 8);
+        dwarfSetup.AddSizePerQuality(8, 9, 2);
+        dwarfSetup.AddSizePerQuality(8, 10, 3);
+        dwarfSetup.AddSizePerQuality(8, 11, 4);
+        dwarfSetup.statusEffect.m_baseCarryWeight = 100f;
         ModelReplacer dwarfReplacement = new ModelReplacer(dwarfBag.Prefab);
         dwarfReplacement.Add("attach/model/chest/stonechest", new ModelReplacer.ReplacementInfo("TreasureChest_dvergrtown", "New/stonechest"));
         dwarfReplacement.Add("attach/model/chest/stonechesttop_closed", new ModelReplacer.ReplacementInfo("TreasureChest_dvergrtown", "New/stonechesttop_closed"));
@@ -180,13 +180,13 @@ internal static class ItemRegistrar
         quiver.RequiredUpgradeItems.Add("Silver", 10, 4);
         quiver.RequiredUpgradeItems.Add("WolfPelt", 5, 4);
         quiver.Crafting.Add(CraftingTable.Workbench, 1);
-        BagSetup setup = new BagSetup(quiver, 4, 1, true);
-        setup.AddSizePerQuality(5, 1, 2);
-        setup.AddSizePerQuality(6, 1, 3);
-        setup.AddSizePerQuality(7, 1, 4);
-        setup.statusEffect.m_skillLevel = Skills.SkillType.Bows;
-        setup.statusEffect.m_skillLevelModifier = 10f;
-        setup.statusEffect.m_speedModifier = 0f;
+        BagSetup quiverSetup = new BagSetup(quiver, 4, 1, true);
+        quiverSetup.AddSizePerQuality(5, 1, 2);
+        quiverSetup.AddSizePerQuality(6, 1, 3);
+        quiverSetup.AddSizePerQuality(7, 1, 4);
+        quiverSetup.statusEffect.m_skillLevel = Skills.SkillType.Bows;
+        quiverSetup.statusEffect.m_skillLevelModifier = 10f;
+        quiverSetup.statusEffect.m_speedModifier = 0f;
         ModelReplacer replacement = new ModelReplacer(quiver.Prefab);
         replacement.Add("attach/Quiver/model", new ModelReplacer.ReplacementInfo("DeerHide", "model"));
     }
@@ -206,14 +206,14 @@ internal static class ItemRegistrar
         mountainQuiver.RequiredUpgradeItems.Add("FlametalNew", 5, 4);
         mountainQuiver.RequiredUpgradeItems.Add("CharredBone", 15, 4);
         mountainQuiver.Crafting.Add(CraftingTable.Forge, 1);
-        BagSetup setup = new BagSetup(mountainQuiver, 8, 1, true);
-        setup.AddSizePerQuality(8, 2, 2);
-        setup.AddSizePerQuality(8, 3, 3);
-        setup.AddSizePerQuality(8, 4, 4);
-        setup.statusEffect.m_skillLevel = Skills.SkillType.Bows;
-        setup.statusEffect.m_skillLevelModifier = 10f;
-        setup.statusEffect.m_speedModifier = 0f;
-        setup.statusEffect.m_inventoryWeightModifier = 0.5f;
+        BagSetup mountainQuiverSetup = new BagSetup(mountainQuiver, 8, 1, true);
+        mountainQuiverSetup.AddSizePerQuality(8, 2, 2);
+        mountainQuiverSetup.AddSizePerQuality(8, 3, 3);
+        mountainQuiverSetup.AddSizePerQuality(8, 4, 4);
+        mountainQuiverSetup.statusEffect.m_skillLevel = Skills.SkillType.Bows;
+        mountainQuiverSetup.statusEffect.m_skillLevelModifier = 10f;
+        mountainQuiverSetup.statusEffect.m_speedModifier = 0f;
+        mountainQuiverSetup.statusEffect.m_inventoryWeightModifier = 0.5f;
     }
 
     private static void RegisterCrossbowQuiver()
@@ -231,13 +231,13 @@ internal static class ItemRegistrar
         crossbowQuiver.RequiredUpgradeItems.Add("FlametalNew", 5, 4);
         crossbowQuiver.RequiredUpgradeItems.Add("CharredBone", 15, 4);
         crossbowQuiver.Crafting.Add(CraftingTable.Forge, 1);
-        BagSetup setup = new BagSetup(crossbowQuiver, 8, 1, true);
-        setup.AddSizePerQuality(8, 2, 2);
-        setup.AddSizePerQuality(8, 3, 3);
-        setup.AddSizePerQuality(8, 4, 4);
-        setup.statusEffect.m_skillLevel = Skills.SkillType.Crossbows;
-        setup.statusEffect.m_skillLevelModifier = 10f;
-        setup.statusEffect.m_speedModifier = 0f;
+        BagSetup crossbowSetup = new BagSetup(crossbowQuiver, 8, 1, true);
+        crossbowSetup.AddSizePerQuality(8, 2, 2);
+        crossbowSetup.AddSizePerQuality(8, 3, 3);
+        crossbowSetup.AddSizePerQuality(8, 4, 4);
+        crossbowSetup.statusEffect.m_skillLevel = Skills.SkillType.Crossbows;
+        crossbowSetup.statusEffect.m_skillLevelModifier = 10f;
+        crossbowSetup.statusEffect.m_speedModifier = 0f;
         ModelReplacer replacement = new ModelReplacer(crossbowQuiver.Prefab);
         replacement.Add("attach/Quiver/default", new ModelReplacer.ReplacementInfo("TrophyGoblinShaman", "attach/default"));
     }
